@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'site-maintenance-manager'
+version '1.0-SNAPSHOT'
+sourceCompatibility = 1.8
+mainClassName='App'
+applicationName='site-maintenance-manager'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.sql2o:sql2o:1.5.4'
+    compile 'org.slf4j:slf4j-simple:1.7.26'
+    compile "com.sparkjava:spark-core:2.8.0"
+    compile "com.sparkjava:spark-template-handlebars:2.7.1"
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'org.postgresql', name: 'postgresql', version: '42.2.2'
+    compile group: 'postgresql', name: 'postgresql', version: '9.0-801.jdbc4'
+}
+
+defaultTasks=['clean']
+task stage(dependsOn: ['clean','installApp'])
