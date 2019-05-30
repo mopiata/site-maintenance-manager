@@ -1,0 +1,27 @@
+{{#partial "content"}}
+
+    <div class="container">
+        <h1>Add an Engineer</h1>
+        <form>
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input class="form-control form-control-lg" id="name" name="name" type="text" placeholder="Engineer's Name">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="eknumber">EK Number</label>
+                <input class="form-control" id="eknumber" name="eknumber" type="number" placeholder="Engineer's EK Number">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input class="form-control" name="phone" id="phone" type="number" placeholder="Engineer's Phone Number">
+            </div>
+            <button type="submit" class="btn btn-primary">Go!</button>
+        </form>
+    </div>
+    <br> <br>
+    <div class="container">
+        <h1>Engineers</h1>
+    </div>
+{{/partial}}
+{{>layout.hbs}}

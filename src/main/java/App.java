@@ -13,5 +13,15 @@ public class App {
             Map<String, Object> model=new HashMap<>();
             return new ModelAndView(model,"index.hbs");
         }, new HandlebarsTemplateEngine());
+
+        get("/sites/new",(request, response) -> {
+            Map<String, Object> model=new HashMap<>();
+            return new ModelAndView(model,"sitesForm.hbs");
+        },new HandlebarsTemplateEngine());
+
+        get("/engineers/new",(request, response) -> {
+            Map<String, Object> model=new HashMap<>();
+            return new ModelAndView(model,"engineersForm.hbs");
+        },new HandlebarsTemplateEngine());
     }
 }
