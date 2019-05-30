@@ -1,4 +1,12 @@
 .landing{
   background-image: url(images/bandwidth-close-up-connection-1148820.jpg);
+  background-size: cover;
+  background-repeat: none;
   color: white;
+  height: 100vh;
+  border-radius: 0px;
+}
+
+.jumbo{
+    padding:0px;
 }
