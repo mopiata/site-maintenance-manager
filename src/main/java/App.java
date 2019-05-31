@@ -39,6 +39,14 @@ public class App {
             return new ModelAndView(model,"success.hbs");
         }, new HandlebarsTemplateEngine());
 
+        get("/sites/:id/delete", (request, response) -> {
+            Map<String, Object> model=new HashMap<>();
+            int idOfSiteToDelete=Integer.parseInt(request.params("id"));
+
+            siteDao.deleteById(idOfSiteToDelete);
+            return new ModelAndView(model,"success.hbs");
+        }, new HandlebarsTemplateEngine());
+
         get("/", (request, response) -> {
             Map<String, Object> model=new HashMap<>();
             return new ModelAndView(model,"index.hbs");
