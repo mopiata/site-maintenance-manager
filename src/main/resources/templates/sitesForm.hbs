@@ -16,7 +16,7 @@
                 <select class="form-control" name="engineer" id="engineer">
                     {{#if engineers}}
                         {{#each engineers}}
-                            <option value="{{id}}">{{name}}</option>
+                            <option value="{{id}}">EK{{ekNumber}}   {{name}}</option>
                         {{/each}}
                     {{else}}
                         <p>No engineers</p>
@@ -29,6 +29,35 @@
     <br> <br>
     <div class="container">
         <h1>Sites</h1>
+        <table class="table table-striped" style="max-width: 90%; margin-left: auto; margin-right: auto;">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Engineer In Charge</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {{#if sites}}
+                {{#each sites}}
+                    <tr>
+                        <td>{{name}}</td>
+                        <td>{{location}}</td>
+                        <td>{{engineerId}}</td>
+                    </tr>
+                {{/each}}
+
+            {{else}}
+                <tr>
+                    <td>No Data</td>
+                    <td>No Data</td>
+                    <td>No Data</td>
+                </tr>
+            {{/if}}
+
+            </tbody>
+        </table>
     </div>
 {{/partial}}
 

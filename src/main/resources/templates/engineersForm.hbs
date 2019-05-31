@@ -21,13 +21,35 @@
     <br> <br>
     <div class="container">
         <h1>Engineers</h1>
-        {{#if engineers}}
-            {{#each engineers }}
-                <p>{{ name }} <a href="/">read more...</a></p>
-            {{/each}}
-        {{else}}
-            <p>No Engineers Added!</p>
-        {{/if}}
+        <table class="table table-striped" style="max-width: 90%; margin-left: auto; margin-right: auto;">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>EK Number</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {{#if engineers}}
+                {{#each engineers}}
+                    <tr>
+                        <td>{{name}}</td>
+                        <td>{{phone}}</td>
+                        <td>{{ekNumber}}</td>
+                    </tr>
+                {{/each}}
+
+            {{else}}
+                <tr>
+                    <td>No Data</td>
+                    <td>No Data</td>
+                    <td>No Data</td>
+                </tr>
+            {{/if}}
+
+            </tbody>
+        </table>
     </div>
 {{/partial}}
 {{>layout.hbs}}
