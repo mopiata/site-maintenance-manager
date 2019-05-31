@@ -10,12 +10,12 @@
                                     <h2 class="card-title">Name: {{engineer.name}}</h2>
                                     <p class="card-text"><strong>Staff Number: </strong> {{engineer.ekNumber}} </p>
                                     <p class="card-text"><strong>Skills: </strong> Site Engineer </p>
-                                    <p><strong>Platform: </strong>
-                                        <span class="badge bg-primary">WordPress</span>
-                                        <span class="badge bg-info">Weebly</span>
-                                        <span class="badge bg-warning">Bootstrap</span>
-                                        <span class="badge bg-success">Wix</span>
-                                    </p>
+<!--                                    <p><strong>Platform: </strong>-->
+<!--                                        <span class="badge bg-primary">WordPress</span>-->
+<!--                                        <span class="badge bg-info">Weebly</span>-->
+<!--                                        <span class="badge bg-warning">Bootstrap</span>-->
+<!--                                        <span class="badge bg-success">Wix</span>-->
+<!--                                    </p>-->
                                 </div>
                                 <div class="col-md-4 col-sm-4 text-center">
                                     <img class="btn-md" src="/images/users.png" alt="" style="border-radius:50%;">
@@ -39,6 +39,35 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="container">
+        <h1>Sites</h1>
+        <table class="table table-striped" style="max-width: 90%; margin-left: auto; margin-right: auto;">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Location</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {{#if sites}}
+                {{#each sites}}
+                    <tr>
+                        <td>{{name}}</td>
+                        <td>{{location}}</td>
+                    </tr>
+                {{/each}}
+            {{else}}
+                <tr>
+                    <td>No Sites</td>
+                    <td>No Sites</td>
+                </tr>
+            {{/if}}
+
+            </tbody>
+        </table>
     </div>
 {{/partial}}
 

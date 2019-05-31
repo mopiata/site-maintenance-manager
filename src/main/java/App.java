@@ -64,11 +64,12 @@ public class App {
         get("engineers/:id", (request, response) -> {
             Map<String, Object> model=new HashMap<>();
             int engineerId=Integer.parseInt(request.params("id"));
-            List<Site> engineerSites=siteDao.all();
+            List<Site> sites=siteDao.all();
+            List<Site> engineerSites=new ArrayList<Site>();
 
-            for(Site engineerSite:engineerSites){
-                if(engineerSite.getEngineerId()!=engineerId){
-                    engineerSites.remove(engineerSite);
+            for(Site engineerSite:sites){
+                if(engineerSite.getEngineerId()==engineerId){
+                    engineerSites.add(engineerSite);
                 }
             }
 
@@ -138,6 +139,35 @@ public class App {
 
             return new ModelAndView(model,"site-details.hbs");
 
+        }, new HandlebarsTemplateEngine());
+
+        get("/sites/:id/update", (request, response) -> {
+            Map<String, Object> model=new HashMap<>();
+            int idOfSiteToUpdate=Integer.parseInt(request.params("id"));
+
+
+            Site editSite=siteDao.findById(idOfSiteToUpdate);
+            Engineer engineer=engineerDao.findById(editSite.getEngineerId());
+            List<Engineer> engineers=engineerDao.all();
+
+            model.put("engineers",engineers);
+            model.put("editSite",editSite);
+            model.put("engineer",engineer);
+
+            return new ModelAndView(model,"sitesForm.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        post("/sites/:id/update", (request, response) -> {
+            Map<String, Object> model=new HashMap<>();
+
+            String name=request.queryParams("name");
+            String location=request.queryParams("location");
+            int engineer=Integer.parseInt(request.queryParams("engineer"));
+
+            int idOfSiteToUpdate=Integer.parseInt(request.params("id"));
+
+            siteDao.update(idOfSiteToUpdate,name,location,engineer);
+            return new ModelAndView(model,"success.hbs");
         }, new HandlebarsTemplateEngine());
 
     }
