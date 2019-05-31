@@ -60,4 +60,25 @@ public class Sql2oEngineerDaoTest {
         assertTrue(engineers.contains(engineer));
         assertTrue(engineers.contains(otherEngineer));
     }
+
+    @Test
+    public void existingEngineersCanBeDeletedById() throws Exception {
+        Engineer engineer=addEngineer();
+        engineerDao.save(engineer); //add to dao (takes care of saving)
+        engineerDao.deleteById(engineer.getId());
+        assertFalse(engineerDao.all().contains(engineer)); //should be the same
+    }
+
+    @Test
+    public void allExistingEngineersCanBeDeleted() throws Exception {
+        Engineer engineer=addEngineer();
+        Engineer otherEngineer=addOtherEngineer();
+
+        engineerDao.save(engineer); //add to dao (takes care of saving)
+        engineerDao.save(otherEngineer);
+        engineerDao.clearAllEngineers();
+        assertTrue(engineerDao.all().size()==0); //should be the same
+    }
+
+
 }

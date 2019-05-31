@@ -2,7 +2,7 @@
 
     <div class="container">
         <h1>Add an Engineer</h1>
-        <form>
+        <form action="/engineers/new" method="post">
             <div class="form-group">
                 <label for="name">Full Name</label>
                 <input class="form-control form-control-lg" id="name" name="name" type="text" placeholder="Engineer's Name">
@@ -21,6 +21,13 @@
     <br> <br>
     <div class="container">
         <h1>Engineers</h1>
+        {{#if engineers}}
+            {{#each engineers }}
+                <p>{{ name }} <a href="/">read more...</a></p>
+            {{/each}}
+        {{else}}
+            <p>No Engineers Added!</p>
+        {{/if}}
     </div>
 {{/partial}}
 {{>layout.hbs}}

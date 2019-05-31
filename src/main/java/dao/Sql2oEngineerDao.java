@@ -47,4 +47,35 @@ public class Sql2oEngineerDao implements EngineerDao {
         }
     }
 
+    @Override
+    public void update(int id, int ekNumber, String name, String phone){
+        String sql = "UPDATE tasks SET eknumber = :ekNumber, name=name, phone=phone WHERE id=:id";
+        try(Connection con=DB.sql2o.open()){
+            System.out.println(id);
+             con.createQuery(sql)
+                     .addParameter("id",id)
+                     .addParameter("eknumber",ekNumber)
+                     .addParameter("name",name)
+                     .addParameter("phone",phone)
+                    .executeAndFetchFirst(Engineer.class);
+        }
+    }
+
+    @Override
+    public void deleteById(int id){
+        try(Connection con=DB.sql2o.open()){
+            con.createQuery("DELETE FROM engineers WHERE id = :id")
+                    .addParameter("id",id)
+                    .executeUpdate();
+        }
+    }
+
+    @Override
+    public void clearAllEngineers(){
+        try(Connection con=DB.sql2o.open()){
+            con.createQuery("DELETE FROM engineers")
+                    .executeUpdate();
+        }
+    }
+
 }
