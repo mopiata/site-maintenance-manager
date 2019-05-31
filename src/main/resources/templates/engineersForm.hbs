@@ -3,7 +3,7 @@
     <div class="container">
         {{#if editEngineer}}
             <h1>Edit Engineer</h1>
-            <form action="/engineers/{{editEngineer}}/update" method="post">
+            <form action="/engineers/{{editEngineer.id}}/update" method="post">
                 <div class="form-group">
                     <label for="name">Full Name</label>
                     <input class="form-control form-control-lg" value="{{editEngineer.name}}" id="name" name="name" type="text" placeholder="Engineer's Name">

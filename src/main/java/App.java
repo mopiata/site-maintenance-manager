@@ -72,8 +72,6 @@ public class App {
                     engineerSites.add(engineerSite);
                 }
             }
-
-            System.out.println(engineerSites);
             Engineer foundEngineer=engineerDao.findById(engineerId);
             model.put("engineer",foundEngineer);
             model.put("sites", engineerSites);

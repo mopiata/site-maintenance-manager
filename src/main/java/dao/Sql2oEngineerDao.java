@@ -40,7 +40,6 @@ public class Sql2oEngineerDao implements EngineerDao {
     public Engineer findById(int id){
 
         try(Connection con=DB.sql2o.open()){
-            System.out.println(id);
             return con.createQuery("SELECT * FROM engineers WHERE id = :id")
                     .addParameter("id",id)
                     .executeAndFetchFirst(Engineer.class);
@@ -49,15 +48,14 @@ public class Sql2oEngineerDao implements EngineerDao {
 
     @Override
     public void update(int id, int ekNumber, String name, String phone){
-        String sql = "UPDATE tasks SET eknumber = :ekNumber, name=name, phone=phone WHERE id=:id";
+        String sql = "UPDATE engineers SET eknumber=:eknumber, name=:name, phone=:phone WHERE id=:id";
         try(Connection con=DB.sql2o.open()){
-            System.out.println(id);
              con.createQuery(sql)
                      .addParameter("id",id)
                      .addParameter("eknumber",ekNumber)
                      .addParameter("name",name)
                      .addParameter("phone",phone)
-                     .executeAndFetchFirst(Engineer.class);
+                     .executeUpdate();
         }
     }
 

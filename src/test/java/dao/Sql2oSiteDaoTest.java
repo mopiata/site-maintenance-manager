@@ -86,6 +86,18 @@ public class Sql2oSiteDaoTest {
         assertTrue(sites.contains(otherSite));
     }
 
+//    @Test
+//    public void updateUpdatesEntryInDb_true() throws Exception{
+//        Site site=addSite();
+//        siteDao.save(site);
+//        String formerName=site.getName();
+//        int id=site.getId();
+//        siteDao.update(id,"Gospel","Nairobi",1);
+//        String newName=site.getName();
+//
+//        assertNotEquals(formerName,newName);
+//    }
+
     @Test
     public void existingSitesCanBeDeletedById() throws Exception {
         Site site=addSite();
