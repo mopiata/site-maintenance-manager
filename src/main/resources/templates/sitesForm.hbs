@@ -2,18 +2,26 @@
 
     <div class="container">
         <h1>Add A Site</h1>
-        <form>
+        <form action="/sites/new" method="post">
             <div class="form-group">
                 <label for="name">Site Name</label>
                 <input class="form-control form-control-lg" id="name" name="name" type="text" placeholder="Site Name">
             </div>
             <div class="form-group">
                 <label for="location">Site Location</label>
-                <input class="form-control" id="location" name="location" type="number" placeholder="Site Location">
+                <input class="form-control" id="location" name="location" type="text" placeholder="Site Location">
             </div>
             <div class="form-group">
                 <label for="engineer">Engineer</label>
-                <input class="form-control" name="engineer" id="engineer" type="number" placeholder="Site Engineer">
+                <select class="form-control" name="engineer" id="engineer">
+                    {{#if engineers}}
+                        {{#each engineers}}
+                            <option value="{{id}}">{{name}}</option>
+                        {{/each}}
+                    {{else}}
+                        <p>No engineers</p>
+                    {{/if}}
+                </select>
             </div>
             <button type="submit" class="btn btn-primary">Go!</button>
         </form>

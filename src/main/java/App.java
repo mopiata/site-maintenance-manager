@@ -4,7 +4,9 @@ import java.util.Map;
 
 import dao.Sql2oEngineerDao;
 import dao.DB;
+import dao.Sql2oSiteDao;
 import models.Engineer;
+import models.Site;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 import static spark.Spark.*;
@@ -26,7 +28,7 @@ public class App {
         staticFileLocation("/public");
 
         Sql2oEngineerDao engineerDao=new Sql2oEngineerDao(DB.sql2o);
-
+        Sql2oSiteDao siteDao=new Sql2oSiteDao(DB.sql2o);
 
         get("/", (request, response) -> {
             Map<String, Object> model=new HashMap<>();
@@ -52,7 +54,25 @@ public class App {
 
         get("/sites/new",(request, response) -> {
             Map<String, Object> model=new HashMap<>();
+            List<Site> sites = siteDao.all();
+            List<Engineer> engineers=engineerDao.all();
+            model.put("engineers",engineers);
+            model.put("sites",sites);
             return new ModelAndView(model,"sitesForm.hbs");
         },new HandlebarsTemplateEngine());
+
+        post("/sites/new", (request, response) -> {
+            Map<String, Object> model=new HashMap<>();
+
+            String siteName=request.queryParams("name");
+            String siteLocation = request.queryParams("location");
+            int engineerId = Integer.parseInt(request.queryParams("engineer"));
+
+            Site newsite = new Site(siteName,siteLocation,engineerId);
+            siteDao.save(newsite);
+
+            model.put("newsite",newsite);
+            return new ModelAndView(model,"success.hbs");
+        }, new HandlebarsTemplateEngine());
     }
 }

@@ -1,18 +1,18 @@
 package models;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class Sites {
+public class Site {
     private int id;
     private String siteName;
     private String siteLocation;
-    private LocalDateTime createdAt;
+    private int engineerId;
 
-    public Sites(String name, String location){
+    public Site(String name, String location, int engineerId){
         this.siteName=name;
         this.siteLocation=location;
+        this.engineerId=engineerId;
     }
 
     public int getId() {
@@ -39,24 +39,26 @@ public class Sites {
         this.siteLocation = siteLocation;
     }
 
-    public LocalDateTime getCreated() {
-        return createdAt;
+    public int getEngineerId() {
+        return engineerId;
     }
 
-    public void setCreated(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    public void setEngineerId(int engineerId) {
+        this.engineerId = engineerId;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Sites sites = (Sites) o;
-        return Objects.equals(siteName, sites.siteName);
+        Site site = (Site) o;
+        return getId() == site.getId() &&
+                Objects.equals(siteName, site.siteName) &&
+                Objects.equals(siteLocation, site.siteLocation);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(siteName);
+        return Objects.hash(getId(), siteName, siteLocation);
     }
 }

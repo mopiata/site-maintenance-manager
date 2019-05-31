@@ -9,7 +9,6 @@ import static org.junit.Assert.*;
 
 public class Sql2oEngineerDaoTest {
     private static Sql2oEngineerDao engineerDao=new Sql2oEngineerDao(DB.sql2o);
-    private Connection con;
 
     //helper mathods
     public Engineer addEngineer(){
@@ -22,6 +21,12 @@ public class Sql2oEngineerDaoTest {
 
     @Rule
     public DatabaseRule database = new DatabaseRule();
+
+    @Test
+    public void NewEngineerObjectCorrectlyCreated_true() throws Exception {
+        Engineer engineer=addEngineer();
+        assertEquals(true, engineer instanceof Engineer);
+    }
 
     @Test
     public void saveEngineerSetsId() throws Exception{
