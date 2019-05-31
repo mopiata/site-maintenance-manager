@@ -3,18 +3,18 @@ package models;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class Employee {
+public class Engineer {
     private int id;
     private int ekNumber;
     private String name;
-    private int phone;
-    private LocalDateTime createdAt;
+    private String phone;
+//    private LocalDateTime createdAt;
 
-    public Employee(int ekNumber, String name, int phone){
+    public Engineer(int ekNumber, String name, String phone){
         this.ekNumber=ekNumber;
         this.name=name;
         this.phone=phone;
-        this.createdAt=LocalDateTime.now();
+//        this.createdAt=LocalDateTime.now();
     }
 
     public int getId() {
@@ -41,33 +41,36 @@ public class Employee {
         this.name = name;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
+//    public LocalDateTime getCreatedAt() {
+//        return createdAt;
+//    }
+//
+//    public void setCreatedAt(LocalDateTime createdAt) {
+//        this.createdAt = createdAt;
+//    }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Employee employee = (Employee) o;
-        return getEkNumber() == employee.getEkNumber();
+        Engineer engineer = (Engineer) o;
+        return getId() == engineer.getId() &&
+                getEkNumber() == engineer.getEkNumber() &&
+                Objects.equals(getName(), engineer.getName()) &&
+                Objects.equals(getPhone(), engineer.getPhone());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getEkNumber());
+        return Objects.hash(getId(), getEkNumber(), getName(), getPhone());
     }
-
 }

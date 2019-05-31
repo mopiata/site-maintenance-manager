@@ -13,7 +13,6 @@ public class Sites {
     public Sites(String name, String location){
         this.siteName=name;
         this.siteLocation=location;
-        this.createdAt=LocalDateTime.now();
     }
 
     public int getId() {

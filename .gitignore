@@ -77,4 +77,4 @@ settings.gradle
 *.iml
 
 !gradle-wrapper.jar
-Constants.java
+environments.Constants.java
