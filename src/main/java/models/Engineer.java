@@ -1,6 +1,5 @@
 package models;
 
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Engineer {
@@ -8,13 +7,11 @@ public class Engineer {
     private int ekNumber;
     private String name;
     private String phone;
-//    private LocalDateTime createdAt;
 
     public Engineer(int ekNumber, String name, String phone){
         this.ekNumber=ekNumber;
         this.name=name;
         this.phone=phone;
-//        this.createdAt=LocalDateTime.now();
     }
 
     public int getId() {
@@ -48,15 +45,6 @@ public class Engineer {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
-//    public LocalDateTime getCreatedAt() {
-//        return createdAt;
-//    }
-//
-//    public void setCreatedAt(LocalDateTime createdAt) {
-//        this.createdAt = createdAt;
-//    }
-
 
     @Override
     public boolean equals(Object o) {

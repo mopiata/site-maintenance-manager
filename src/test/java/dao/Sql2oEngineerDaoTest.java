@@ -1,6 +1,5 @@
 package dao;
 import models.Engineer;
-import org.sql2o.*;
 import org.junit.*;
 
 import java.util.List;
@@ -65,17 +64,6 @@ public class Sql2oEngineerDaoTest {
         assertTrue(engineers.contains(engineer));
         assertTrue(engineers.contains(otherEngineer));
     }
-
-//    @Test
-//    public void updateUpdatesEntryInDb_true() throws Exception{
-//        Engineer engineer=addEngineer();
-//        engineerDao.save(engineer);
-//        int id=engineer.getId();
-//        engineerDao.update(id,6789,"Ricky","56788292");
-//        String newName=engineer.getName();
-//
-//        assertEquals("Ricky",newName);
-//    }
 
     @Test
     public void existingEngineersCanBeDeletedById() throws Exception {
