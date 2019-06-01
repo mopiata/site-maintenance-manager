@@ -49,6 +49,48 @@ public class App {
 
         get("/", (request, response) -> {
             Map<String, Object> model=new HashMap<>();
+            List<Site> sites=siteDao.all();
+            List<Engineer> engineers=engineerDao.all();
+
+            List<Site> unassignedSites=new ArrayList<Site>();
+            List<Engineer> unassignedEngineers= new ArrayList<Engineer>();
+
+            boolean siteAssigned=false;
+            boolean engineerAssigned=false;
+
+            for(Site site:sites){
+                for (Engineer engineer:engineers){
+                    if(site.getEngineerId()==engineer.getId()){
+                        System.out.println("Site is assigned");
+                        siteAssigned=true;
+                        break;
+                    }else{
+                        siteAssigned=false;
+                    }
+                }
+                if(siteAssigned==false){
+                    unassignedSites.add(site);
+                }
+            }
+
+            for(Engineer engineer:engineers){
+                for (Site site:sites){
+                    if(site.getEngineerId()==engineer.getId()){
+                        System.out.println("Engineer is assigned");
+                        engineerAssigned=true;
+                        break;
+                    }else{
+                        engineerAssigned=false;
+                    }
+                }
+                if(engineerAssigned==false){
+                    unassignedEngineers.add(engineer);
+                }
+            }
+
+            model.put("engineers",unassignedEngineers);
+            model.put("sites",unassignedSites);
+
             return new ModelAndView(model,"index.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -61,12 +103,37 @@ public class App {
 
         post("/engineers/new",(request, response) -> {
             Map<String, Object> model=new HashMap<>();
+            List<Engineer> engineer=engineerDao.all();
+
             String name=request.queryParams("name");
             String phone=request.queryParams("phone");
             int eknumber=Integer.parseInt(request.queryParams("eknumber"));
-            engineerDao.save(new Engineer(eknumber,name,phone));
-//            response.redirect("success.hbs");
-            return new ModelAndView(model,"success.hbs");
+
+            boolean engineerExists=false;
+
+            if(engineer.size()==0){
+                System.out.println("Engineer to be added.");
+                engineerExists=false;
+            }else {
+                for (Engineer singleEngineer : engineer) {
+                    if (singleEngineer.getEkNumber() == eknumber) {
+                        System.out.println("Engineer Exists!");
+                        engineerExists = true;
+                        break;
+                    } else {
+                        System.out.println("Engineer to be added.");
+                        engineerExists = false;
+                    }
+                }
+            }
+
+
+            if(!engineerExists){
+                engineerDao.save(new Engineer(eknumber,name,phone));
+                return new ModelAndView(model,"success.hbs");
+            }else {
+                return new ModelAndView(model,"reject.hbs");
+            }
         }, new HandlebarsTemplateEngine());
 
         get("engineers/:id", (request, response) -> {

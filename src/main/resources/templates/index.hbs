@@ -4,8 +4,76 @@
         <p class="lead">Create and assign resources.</p>
         <hr class="my-4">
         <p class="lead">
-            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+            <a class="btn btn-primary btn-lg" data-toggle="modal" data-target="#unassigned" role="button">Check Unassigned Resources</a>
         </p>
+    </div>
+
+
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#unassigned">
+        Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="unassigned" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Unassigned</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body unassigned">
+                    <table class="table table-striped" style="max-width: 90%; margin-left: auto; margin-right: auto;">
+                        <thead>
+                        <tr>
+                            <th>Engineers without Sites</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {{#if engineers}}
+                                {{#each engineers}}
+                                    <tr>
+                                        <td><a href="/engineers/{{id}}"> {{name}} </a></td>
+                                    </tr>
+                                {{/each}}
+                            {{else}}
+                                <tr>
+                                    <td>No Unassigned engineer</td>
+                                </tr>
+                            {{/if}}
+                        </tbody>
+                    </table>
+
+                    <table class="table table-striped" style="max-width: 90%; margin-left: auto; margin-right: auto;">
+                        <thead>
+                        <tr>
+                            <th>Sites without Engineers</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {{#if sites}}
+                                {{#each sites}}
+                                    <tr>
+                                        <td><a href="/sites/{{id}}"> {{name}} </a></td>
+                                    </tr>
+                                {{/each}}
+                            {{else}}
+                                <tr>
+                                    <td>No Unassigned Sites</td>
+                                </tr>
+                            {{/if}}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
 {{/partial}}
 
